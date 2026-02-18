@@ -2,6 +2,7 @@ import React from "react";
 import NextHead from "next/head";
 
 import { siteConfig } from "@/config/site";
+import { withBasePath } from "@/lib/base-path";
 
 type HeadProps = {
   title?: string;
@@ -28,7 +29,7 @@ export const Head = ({ title, description }: HeadProps) => {
         content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         name="viewport"
       />
-      <link href="/logo.ico" rel="icon" />
+      <link href={withBasePath("/logo.ico")} rel="icon" />
     </NextHead>
   );
 };

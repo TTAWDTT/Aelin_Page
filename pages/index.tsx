@@ -10,6 +10,7 @@ import { GithubIcon } from "@/components/icons";
 import { subtitle, title } from "@/components/primitives";
 import { fontChinese } from "@/config/fonts";
 import DefaultLayout from "@/layouts/default";
+import { withBasePath } from "@/lib/base-path";
 
 export default function IndexPage() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function IndexPage() {
             alt="Aelin"
             className="object-cover"
             sizes="208px"
-            src="/smile.png"
+            src={withBasePath("/smile.png")}
           />
         </div>
         <h1 className={title()}>Aelin</h1>

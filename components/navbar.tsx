@@ -17,6 +17,7 @@ import { useCallback } from "react";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon } from "@/components/icons";
+import { withBasePath } from "@/lib/base-path";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ export const Navbar = () => {
               isBordered
               className="h-7 w-7"
               name="Aelin"
-              src="/logo.ico"
+              src={withBasePath("/logo.ico")}
             />
             <p className="font-bold text-inherit">Aelin</p>
           </Link>

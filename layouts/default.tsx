@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Link } from "@heroui/link";
 import { useRouter } from "next/router";
 
@@ -5,6 +6,7 @@ import { Head } from "./head";
 
 import { Navbar } from "@/components/navbar";
 import { SakuraOverlay } from "@/components/sakura-overlay";
+import { withBasePath } from "@/lib/base-path";
 
 export default function DefaultLayout({
   children,
@@ -17,9 +19,13 @@ export default function DefaultLayout({
 }) {
   const router = useRouter();
   const showSakura = !router.pathname.startsWith("/docs");
+  const appShellStyle = {
+    "--app-bg-image-light": `url("${withBasePath("/background.png")}")`,
+    "--app-bg-image-dark": `url("${withBasePath("/background_dark.png")}")`,
+  } as CSSProperties;
 
   return (
-    <div className="app-shell relative flex h-screen flex-col">
+    <div className="app-shell relative flex h-screen flex-col" style={appShellStyle}>
       <Head description={description} title={title} />
       {showSakura ? <SakuraOverlay /> : null}
       <Navbar />

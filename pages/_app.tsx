@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 import { fontSans, fontMono } from "@/config/fonts";
+import { withBasePath } from "@/lib/base-path";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -89,7 +90,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 alt="Aelin loading"
                 className="route-loading-gif"
                 height={144}
-                src="/love.gif"
+                src={withBasePath("/love.gif")}
                 width={144}
               />
               <p className="route-loading-text">Aelin is loading...</p>

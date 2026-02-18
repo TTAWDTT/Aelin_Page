@@ -122,7 +122,7 @@
   inset: 0;
   z-index: -3;
   pointer-events: none;
-  background-image: url("/background.png");
+  background-image: var(--app-bg-image-light);
   background-position: center;
   background-repeat: no-repeat;
   background-size: clamp(960px, 115vw, 2280px) auto;
@@ -166,7 +166,7 @@
 }
 
 .dark .app-shell::before {
-  background-image: url("/background_dark.png");
+  background-image: var(--app-bg-image-dark);
   background-size: clamp(1024px, 120vw, 2400px) auto;
   background-position: center top;
   opacity: 0.7;
