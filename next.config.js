@@ -1,7 +1,25 @@
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+const trimmedBasePath = typeof rawBasePath === "string" ? rawBasePath.trim() : "";
+const normalizedBasePath =
+  !trimmedBasePath || trimmedBasePath === "/"
+    ? ""
+    : trimmedBasePath.startsWith("/")
+      ? trimmedBasePath.replace(/\/$/, "")
+      : `/${trimmedBasePath.replace(/\/$/, "")}`;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...(normalizedBasePath
+    ? {
+        assetPrefix: normalizedBasePath,
+        basePath: normalizedBasePath,
+      }
+    : {}),
+  output: "export",
   reactStrictMode: true,
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 7,
   },

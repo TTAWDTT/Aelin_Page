@@ -15,6 +15,7 @@ import {
   sanitizeHtml,
   splitPathAndSuffix,
 } from "./markdown-utils";
+import { withBasePath } from "./base-path";
 
 export type AboutPageData = {
   title: string;
@@ -63,10 +64,10 @@ function resolveAboutHref(href: string, currentDocPath: string): string {
   if (!resolvedPath) return href;
 
   if (/\.(md|mdx)$/i.test(resolvedPath)) {
-    return `/about${suffix}`;
+    return withBasePath(`/about${suffix}`);
   }
 
-  return `/api/about-asset/${encodePath(resolvedPath)}${suffix}`;
+  return withBasePath(`/about-asset/${encodePath(resolvedPath)}${suffix}`);
 }
 
 function resolveImageSrc(src: string, currentDocPath: string): string {
@@ -78,7 +79,7 @@ function resolveImageSrc(src: string, currentDocPath: string): string {
 
   if (!resolvedPath) return src;
 
-  return `/api/about-asset/${encodePath(resolvedPath)}${suffix}`;
+  return withBasePath(`/about-asset/${encodePath(resolvedPath)}${suffix}`);
 }
 
 function resolveImageAbsolutePath(

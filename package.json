@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run prepare:assets && next dev",
+    "build": "npm run prepare:assets && next build",
     "start": "next start",
     "lint": "eslint --fix",
-    "clean": "node scripts/clear-next-cache.mjs"
+    "clean": "node scripts/clear-next-cache.mjs",
+    "prepare:assets": "node scripts/sync-content-assets.mjs"
   },
   "dependencies": {
     "@heroui/accordion": "2.2.28",

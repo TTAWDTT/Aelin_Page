@@ -17,6 +17,7 @@ import {
   splitPathAndSuffix,
   toPosixPath,
 } from "./markdown-utils";
+import { withBasePath } from "./base-path";
 
 export type DocHeading = {
   id: string;
@@ -106,10 +107,10 @@ function stripDocExtension(filePath: string): string {
 
 function toDocHref(slug: string[]): string {
   if (!slug.length) {
-    return "/docs";
+    return withBasePath("/docs");
   }
 
-  return `/docs/${encodePath(slug.join("/"))}`;
+  return withBasePath(`/docs/${encodePath(slug.join("/"))}`);
 }
 
 function resolveDocsRelativePath(
@@ -175,7 +176,7 @@ function resolveMarkdownHref(
     return `${toDocHref(resolvedPath.split("/"))}${suffix}`;
   }
 
-  return `/api/docs-asset/${encodePath(resolvedPath)}${suffix}`;
+  return withBasePath(`/docs-asset/${encodePath(resolvedPath)}${suffix}`);
 }
 
 function resolveImageSrc(src: string, currentDocPath: string): string {
@@ -187,7 +188,7 @@ function resolveImageSrc(src: string, currentDocPath: string): string {
 
   if (!resolvedPath) return src;
 
-  return `/api/docs-asset/${encodePath(resolvedPath)}${suffix}`;
+  return withBasePath(`/docs-asset/${encodePath(resolvedPath)}${suffix}`);
 }
 
 function resolveImageAbsolutePath(

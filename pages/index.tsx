@@ -19,7 +19,6 @@ export default function IndexPage() {
     if (shouldPrefetch) {
       void router.prefetch("/docs");
     }
-    void fetch("/api/docs-manifest").catch(() => undefined);
   }, [router, shouldPrefetch]);
 
   return (

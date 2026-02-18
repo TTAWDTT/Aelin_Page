@@ -36,27 +36,11 @@ function toDocPath(slug) {
 
 async function warmupDocs(baseUrl) {
   try {
-    const docsResponse = await fetch(`${baseUrl}/docs`, {
-      cache: "no-store",
-    });
+    const docsResponse = await fetch(`${baseUrl}/docs`, { cache: "no-store" });
 
-    if (!docsResponse.ok) {
-      return;
-    }
+    if (!docsResponse.ok) return;
 
-    const manifestResponse = await fetch(`${baseUrl}/api/docs-manifest`, {
-      cache: "no-store",
-    });
-
-    if (!manifestResponse.ok) {
-      return;
-    }
-
-    const manifest = await manifestResponse.json();
-    const extraPaths = (manifest.searchEntries ?? [])
-      .slice(0, 4)
-      .map((entry) => toDocPath(entry?.slug))
-      .filter(Boolean);
+    const extraPaths = ["/about", toDocPath(["getting-started", "welcome"])].filter(Boolean);
 
     await Promise.allSettled(
       extraPaths.map((path) =>

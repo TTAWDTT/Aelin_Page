@@ -323,7 +323,6 @@ const DocContent = memo(function DocContent({
 
 function DocsNav({
   tree,
-  manifestStatus,
   rootFiles,
   topLevelFolders,
   activePath,
@@ -335,7 +334,6 @@ function DocsNav({
   onSearch,
 }: {
   tree: DocTreeNode[];
-  manifestStatus: "idle" | "loading" | "ready" | "error";
   rootFiles: Extract<DocTreeNode, { type: "file" }>[];
   topLevelFolders: Extract<DocTreeNode, { type: "folder" }>[];
   activePath: string;
@@ -414,9 +412,7 @@ function DocsNav({
 
           {!rootFiles.length && !topLevelFolders.length ? (
             <div className="px-2 text-sm text-zinc-600 dark:text-white/80">
-              {manifestStatus === "loading" || manifestStatus === "idle" ? (
-                "Loading docs..."
-              ) : tree.length ? (
+              {tree.length ? (
                 <DirectoryTree
                   activePath={activePath}
                   nodes={tree}
@@ -439,14 +435,10 @@ export default function DocsPage({
   initialTree,
 }: DocsPageProps) {
   const router = useRouter();
-  const [tree, setTree] = useState<DocTreeNode[]>(initialTree);
+  const tree = initialTree;
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchEntries, setSearchEntries] =
-    useState<DocSearchEntry[]>(initialSearchEntries);
-  const [manifestStatus, setManifestStatus] = useState<
-    "idle" | "loading" | "ready" | "error"
-  >(initialTree.length || initialSearchEntries.length ? "ready" : "idle");
+  const searchEntries = initialSearchEntries;
   const [isRouteLoading, setIsRouteLoading] = useState(false);
   const [optimisticActivePath, setOptimisticActivePath] = useState("");
   const [activeHeadingId, setActiveHeadingId] = useState("");
@@ -514,50 +506,9 @@ export default function DocsPage({
     setIsSidebarCollapsed((prev) => !prev);
   }, []);
 
-  const loadManifest = useCallback(async () => {
-    if (manifestStatus === "ready" || manifestStatus === "loading") {
-      return;
-    }
-
-    setManifestStatus("loading");
-
-    try {
-      const response = await fetch("/api/docs-manifest");
-
-      if (!response.ok) {
-        throw new Error("failed to load docs manifest");
-      }
-
-      const payload = (await response.json()) as {
-        tree?: DocTreeNode[];
-        entries?: DocSearchEntry[];
-        searchEntries?: DocSearchEntry[];
-      };
-
-      setTree(payload.tree ?? []);
-      setSearchEntries(payload.searchEntries ?? payload.entries ?? []);
-      setManifestStatus("ready");
-    } catch {
-      setManifestStatus("error");
-    }
-  }, [manifestStatus]);
-
-  useEffect(() => {
-    if (manifestStatus === "idle") {
-      void loadManifest();
-    }
-  }, [loadManifest, manifestStatus]);
-
-  const onSearch = useCallback(
-    (value: string) => {
-      setSearchQuery(value);
-
-      if (value.trim() && manifestStatus === "idle") {
-        void loadManifest();
-      }
-    },
-    [loadManifest, manifestStatus],
-  );
+  const onSearch = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
 
   const onActiveHeadingChange = useCallback((headingId: string) => {
     setActiveHeadingId(headingId);
@@ -674,11 +625,10 @@ export default function DocsPage({
               <DocsNav
                 activePath={activePath}
                 defaultExpandedKeys={defaultExpandedKeys}
-                manifestStatus={manifestStatus}
                 rootFiles={rootFiles}
                 searchQuery={searchQuery}
                 searchResults={searchResults}
-                searchStatus={manifestStatus}
+                searchStatus="ready"
                 topLevelFolders={topLevelFolders}
                 tree={tree}
                 onNavigate={onNavigate}
@@ -714,11 +664,10 @@ export default function DocsPage({
                     <DocsNav
                       activePath={activePath}
                       defaultExpandedKeys={defaultExpandedKeys}
-                      manifestStatus={manifestStatus}
                       rootFiles={rootFiles}
                       searchQuery={searchQuery}
                       searchResults={searchResults}
-                      searchStatus={manifestStatus}
+                      searchStatus="ready"
                       topLevelFolders={topLevelFolders}
                       tree={tree}
                       onNavigate={(targetRelPath) => {
@@ -780,7 +729,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: false,
   };
 };
 
