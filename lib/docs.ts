@@ -593,6 +593,7 @@ export function findDocBySlug(
   }
 
   const preferred =
+    docs.find((doc) => doc.relPath === "concepts/前言.md") ??
     docs.find((doc) => doc.relPath === "getting-started/welcome.md") ??
     docs.find((doc) => doc.relPath.endsWith("/README.md")) ??
     docs[0];
