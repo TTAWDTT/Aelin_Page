@@ -1,40 +1,65 @@
----
+﻿---
 title: Device Interaction
 slug: /features/device
-description: Aelin 支持设备侧观测与部分控制能力，帮助你在性能、专注与可用性之间取得更稳的平衡。
+description: Aelin 支持本地设备进程治理、模式切换和专注联动，并在桌面壳中提供桌宠行为引擎。
 ---
 
 # Device Interaction
 
-`Device Interaction` 让 Aelin 不只停留在“信息层”，而是能够在你授权与平台能力允许的前提下，感知设备状态并执行有限控制动作。
+Aelin 在本地机提供“可控”的设备能力，分为进程控制、模式切换、专注联动三部分。
 
-它的目标不是替代系统设置，而是在关键时刻给你更快、更轻量的协助。
+## 进程治理
 
-## 当前能力（按平台可用性）
+核心接口：
 
-- 读取进程列表，并支持按 CPU / 内存占用排序。
-- 识别异常占用或资源峰值，辅助定位卡顿来源。
-- 对进程执行动作（结束、调低优先级、调高优先级）。
-- 应用场景模式（`meeting / focus / sleep / normal`）。
+- `GET /api/v1/aelin/device/processes`
+- `POST /api/v1/aelin/device/processes/{pid}/action`
+- `POST /api/v1/aelin/device/processes/optimize`
 
-不同操作系统下能力深度会有差异，Aelin 会尽量以“可执行或可解释”的方式反馈结果。
+可见能力：
 
-## 典型场景
+- 进程列表（CPU/内存排序）
+- 异常评分（anomaly score + reasons）
+- 终止高风险进程
+- 优先级调整（high/low）
 
-- 电脑突然变慢时，快速找出高占用进程。
-- 进入专注状态时，降低干扰与非关键资源竞争。
-- 夜间使用时，配合低干扰模式稳定工作节奏。
+## 模式切换
 
-这些场景的共同点是：你不想在系统菜单里层层查找，而希望先得到一个可执行的起点。
+接口：
 
-## 使用建议
+- `GET /api/v1/aelin/device/mode`
+- `POST /api/v1/aelin/device/mode/apply`
 
-- 首次使用时先观察，不急于批量结束进程。
-- 对关键系统进程保持谨慎，优先处理明确异常对象。
-- 模式切换建议结合你的真实作息，不必追求“全自动”。
+后端明确支持：
 
-## 安全与边界
+- `meeting`
+- `focus`
+- `sleep`
+- `normal`
+- `default`（归一为 `normal`）
 
-设备控制能力受到权限模型约束。某些动作可能会回退为“记录建议但不执行系统级变更”。这并不是失败，而是为了保证整体安全性和系统稳定性。
+其它模式值会降级为 `normal`。
 
-在需要高风险变更时，建议你将 Aelin 的结论当作“辅助判断”，并保留最终人工确认。
+## 专注模式联动
+
+`Focus` 页面会把两个状态绑在一起：
+
+- 通知静默（前端通知状态）
+- 设备模式（后端 mode state）
+
+所以“开启专注”不仅是 UI 标记，也会尝试触发系统级动作。
+
+## Electron 桌面壳与桌宠
+
+桌面端由 Electron 承载，支持：
+
+- Windows 安装包打包（electron-builder）
+- 托盘与悬浮窗
+- 桌宠状态机（resting/working/completed/happy）
+- 行为/情绪文案与媒体控制联动
+
+## 边界说明
+
+- 非 Windows 环境下，模式控制会退化为“状态记录 + 部分能力可用”。
+- 前端存在 `performance/battery` 快捷按钮，但后端会按未知模式降级处理。
+- 系统级静音/亮度等动作受设备权限和系统策略影响，可能出现 partial 状态。

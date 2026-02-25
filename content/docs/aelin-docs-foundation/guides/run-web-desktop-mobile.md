@@ -1,53 +1,74 @@
----
+﻿---
 title: Run on Web / Desktop / Mobile
 slug: /guides/run-multi-platform
-description: Aelin 在 Web、桌面、移动端的运行方式、差异与排障重点。
+description: 说明 Aelin 在 Web、Electron 桌面端与移动访问场景的运行方式与注意事项。
 ---
 
 # Run on Web / Desktop / Mobile
 
-Aelin 支持多端运行，但不同端的启动方式和网络依赖并不完全一致。理解这些差异，能显著降低排障成本。
+## Web（主开发形态）
 
-## Web
+### 后端
 
-Web 模式通常采用前后端分离运行，优点是：
+```powershell
+cd D:\HuaweiMoveData\Users\yixiao\Desktop\MercuryDesk\backend
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --reload --port 8000
+```
 
-- 启动快，便于开发调试。
-- 排障路径清晰，日志更容易获取。
+### 前端
 
-如果你当前在做功能迭代，建议优先从 Web 模式验证。
+```powershell
+cd D:\HuaweiMoveData\Users\yixiao\Desktop\MercuryDesk\frontend
+npm install
+npm run dev
+```
 
-## Desktop
+访问：`http://127.0.0.1:5173`
 
-Desktop 一般由桌面壳拉起前后端，目标是“开箱即用”。
+## Desktop（Electron 壳）
 
-你会得到更贴近日常工作的使用体验，但在打包与系统权限层面会多一些环境依赖。建议在 Web 稳定后再推进 Desktop 打包。
+### 开发模式
 
-## Mobile
+```powershell
+cd D:\HuaweiMoveData\Users\yixiao\Desktop\MercuryDesk\desktop
+npm install
+npm run dev
+```
 
-Mobile 通常使用 Capacitor 容器运行，关键点是网络可达性：
+桌面壳会拉起前后端并加载桌宠窗口。
 
-- 真机或模拟器必须能访问你的后端地址。
-- 同一局域网、端口开放、地址配置正确是基础前提。
+### Windows 打包
 
-如果这里链路没打通，登录、检索、跟踪都会出现连锁失败。
+```powershell
+cd D:\HuaweiMoveData\Users\yixiao\Desktop\MercuryDesk\desktop
+npm run dist
+```
 
-## 端间一致性建议
+产物默认输出到 `desktop/release-dist`（或配置指定目录）。
 
-- 在一个端先跑通完整闭环，再迁移到其他端。
-- 保持同一套核心配置，减少环境变量漂移。
-- 对差异行为做记录，便于回归验证。
+## Mobile（当前建议：同网段 Web 访问）
 
-## 排障核心
+当前仓库没有独立移动端工程；移动使用方式是通过浏览器访问前端服务。
 
-- 登录 `failed to fetch`：首先检查 API 地址是否可达。
-- 安装或打包失败：优先排查 SDK、证书与依赖环境。
-- 输出乱码：检查终端编码与子进程编码设置。
+- 保证手机与开发机同网段。
+- 前端请求后端时使用可达地址（不要写 `localhost`）。
+- 需要放通端口与防火墙策略。
 
-## 推荐工作流
+## 常见问题
 
-1. Web 完成能力验证。
-2. Desktop 验证交互与系统协同。
-3. Mobile 验证网络、性能与稳定性。
+1. `failed to fetch`
+后端地址不可达，优先检查 IP、端口、防火墙。
 
-按这个节奏推进，通常最省时间，也最不容易陷入多端并行排障。
+2. OAuth 回调不生效
+检查：
+
+- `MERCURYDESK_OAUTH_REDIRECT_BASE_URL`
+- 第三方平台回调地址
+- 前后端访问域名是否一致
+
+3. 桌面打包失败
+通常是依赖环境问题（Node/Python/构建工具版本、证书策略、代理网络）。
+
+4. 环境变量命名疑惑
+项目名是 Aelin，但环境变量仍使用 `MERCURYDESK_*`，属于兼容策略。

@@ -1,53 +1,90 @@
----
+﻿---
 title: API Overview
 slug: /reference/api
-description: Aelin 与 Agent 核心接口总览，帮助你快速定位能力边界与调用入口。
+description: Aelin 后端按领域拆分的路由总览，帮助你快速定位能力入口与职责边界。
 ---
 
 # API Overview
 
-这一页不是完整 API 文档，而是接口地图。
+基础前缀：`/api/v1`
 
-它的目的，是让你先知道“能力分组在哪里”，再进入更细的实现或调试。
+健康检查：`/healthz`
 
-## Aelin 核心
+静态媒体：`/media/*`
 
-- `POST /api/v1/aelin/chat`
-- `POST /api/v1/aelin/chat/stream`
-- `GET /api/v1/aelin/context`
-- `GET /api/v1/aelin/proactive/poll`
-- `GET /api/v1/aelin/tracking`
-- `POST /api/v1/aelin/track/confirm`
+## 路由分域
 
-这组接口覆盖了对话、上下文、主动提醒和跟踪确认等核心流程。
+后端在 `FastAPI lifespan` 中初始化数据库并启动追踪调度器，随后按域挂载路由：
 
-## 设备能力
+- `auth`
+- `accounts`
+- `contacts`
+- `messages`
+- `agent`
+- `aelin`
+- `desk`
+- `inbound`
 
-- `GET /api/v1/aelin/device/processes`
-- `POST /api/v1/aelin/device/processes/{pid}/action`
-- `POST /api/v1/aelin/device/processes/optimize`
-- `GET /api/v1/aelin/device/capabilities`
-- `POST /api/v1/aelin/device/mode/apply`
+## 1) Auth
 
-这组接口围绕设备状态感知和可控动作，适合性能辅助与场景模式切换。
+- `POST /register`
+- `POST /token`
+- `GET /me`
+- `PATCH /me`
+- `POST /me/avatar`
 
-## Agent / Memory
+兼容保留：`/auth/*` 同名旧路由。
 
-- `GET /api/v1/agent/config`
-- `PATCH /api/v1/agent/config`
-- `GET /api/v1/agent/memory`
-- `POST /api/v1/agent/memory/layout`
-- `GET /api/v1/agent/daily-brief`
-- `POST /api/v1/agent/search/advanced`
+## 2) Accounts（数据源接入）
 
-这组接口支撑配置管理、记忆读取与高级检索，是长期能力稳定运行的基础层。
+- 账号 CRUD：`GET/POST /accounts`、`DELETE /accounts/{id}`
+- OAuth 启动与回调：`/accounts/oauth/{provider}/start|callback`
+- 用户级 OAuth 凭据：`GET/PATCH /accounts/oauth/{provider}/config`
+- 手动同步任务：`POST /accounts/{id}/sync`
+- 同步状态查询：`GET /accounts/sync-jobs/{job_id}`
+- 邮件转发信息：`GET /accounts/{id}/forward-info`
+- X 配置：`/accounts/x/config`、`/accounts/x/cookies`
 
-## 使用建议
+## 3) Inbound（邮件转发入口）
 
-- 先从分组理解接口，再看单接口细节。
-- 调试时按“输入参数 → 返回结构 → 状态码”三步记录。
-- 对关键链路建立最小可复现请求，便于回归测试。
+- `POST /inbound/forward/{secret}`
+- `POST /inbound/forward`
 
-## 说明
+用于把外部转发邮件写入消息存储。
 
-后续版本会在这组总览基础上补充更细粒度示例（请求体、响应体、异常码和推荐重试策略）。
+## 4) Desk（观察台）
+
+- 内容流：`GET /desk/feed`
+- 标签体系：`GET /desk/tags`
+- 标签关注：`POST /desk/tags/follow`
+- 取消关注：`DELETE /desk/tags/follow/{tag}`
+
+## 5) Agent（通用 AI 能力）
+
+- 对话：`POST /agent/chat`
+- 摘要与草稿：`/agent/summarize*`、`/agent/draft-reply*`
+- 模型目录：`GET /agent/catalog`
+- 配置：`GET/PATCH /agent/config`
+- 测试：`POST /agent/test`
+- 记忆/Todo：`/agent/memory*`、`/agent/todos*`
+
+## 6) Aelin（主业务域）
+
+- Chat：`POST /aelin/chat`、`POST /aelin/chat/stream`
+- Context/通知：`/aelin/context`、`/aelin/notifications`、`/aelin/proactive/poll`
+- 追踪：`/aelin/track/confirm`、`/aelin/tracking/*`
+- 文件记忆：`/aelin/tracking/file-memory/*`
+- 媒体摄取：`POST /aelin/media/ingest`
+- 抖音登录引导：`POST /aelin/media/auth/douyin/guide`
+- 设备控制：`/aelin/device/*`
+
+## 7) Contacts / Messages
+
+- 联系人列表与会话：`/contacts*`
+- 消息详情：`/messages/{message_id}`
+
+## 设计要点
+
+- 领域边界清晰：接入、推理、追踪、观察、设备分离。
+- Aelin 域覆盖最终用户主流程；Agent 域提供较通用 AI 工具面。
+- 追踪调度属于服务生命周期能力，不依赖外部 cron。

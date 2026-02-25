@@ -1,49 +1,83 @@
----
+﻿---
 title: Long-term Tracking
 slug: /features/tracking
-description: 由用户确认后，Aelin 将一次关注升级为长期跟踪任务，并持续写入可复用记忆。
+description: Aelin 将一次关注变成长期任务，支持自治调度、变化检测、快照对比与通知联动。
 ---
 
 # Long-term Tracking
 
-`Long-term Tracking` 是 Aelin 与普通聊天工具最核心的差异之一。
+追踪系统是 Aelin 的核心差异能力。它把“这次帮我看一下”变成“之后持续帮我盯着”。
 
-在普通模式里，问题解决后通常就结束了；而在跟踪模式里，系统会把“这一次提问”延展为“可持续更新的任务”。
+## 追踪目标模型
 
-## 跟踪流程
+目标由 `TrackingTarget` 表持久化，关键字段包括：
 
-1. Aelin 在回答后识别潜在长期价值。
-2. 系统询问你是否建立跟踪。
-3. 你确认后，系统检查数据源可用性。
-4. 跟踪任务启动并进入持续同步。
-5. 新变化写入对话证据、跟踪中心与记忆层。
+- `target/source/track_type/source_key`
+- `status`（active/paused/error/deleted）
+- `interval_seconds`
+- `notify_level`
+- `error_count/last_hash/next_run_at`
+- `is_temporary/expires_at`
 
-整个流程强调“用户确认在前”，确保可控与透明。
+## 创建与运行
 
-## 当前支持方向
+入口：`POST /api/v1/aelin/track/confirm`
 
-- Web 跟踪（公开网页与资讯）。
-- 平台型跟踪（如 X / 抖音 / 小红书 / 微博 / B 站，取决于你的配置）。
-- 邮件与 RSS 类源。
+- 可在 Chat 中确认，也可在 Tracking 页手动创建。
+- 创建后会立即唤醒调度器，并可执行 `run_target_now`。
 
-你可以把它理解为“信息来源的统一调度层”，而不是某一个平台的专用工具。
+手动运行：`POST /api/v1/aelin/tracking/targets/{id}/run`
 
-## 可见性
+自动运行：后台线程按 `next_run_at` 分发。
 
-跟踪建立后，你可以在多个位置看到状态：
+## 变化检测机制
 
-- 跟踪中心：查看任务生命周期与同步状态。
-- 记忆层：查看进行中事项与沉淀结果。
-- 通知中心：接收关键变化提醒。
+每次运行会：
 
-这能帮助你随时判断：任务是否健康、信息是否有效、是否需要调整范围。
+1. 抓取并标准化 payload
+2. 与上次快照做 hash/字段对比
+3. 写入快照（`TrackingSnapshot`）
+4. 生成变化（`TrackingChange`）
 
-## 使用建议
+常见变化类型：
 
-- 跟踪目标越具体，结果越稳定（账号、网址、唯一标识优先）。
-- 不同主题尽量分开管理，避免语义污染。
-- 定期清理失效目标，保持记忆层质量。
+- `new_item`
+- `updated_item`
+- `removed_item`
+- `metric_spike`
+- `fetch_error`
+- `status_change`
+- `recovered`
 
-## 能力边界
+## 已读确认与通知联动
 
-长期跟踪依赖外部平台可访问性与数据稳定性。遇到反爬、限流或结构变化时，更新频率与质量可能波动。Aelin 会尽量给出可解释反馈，但你仍应对关键决策保留复核流程。
+- 变化列表：`GET /tracking/targets/{id}/changes`
+- 批量确认：`POST /tracking/targets/{id}/changes/ack`
+- 单条确认：`POST /tracking/changes/{change_id}/ack`
+
+未确认变化会进入通知聚合，并可在 Desk / Focus 页面联动消费。
+
+## 自主调度（Autonomy Scheduler）
+
+调度器在 FastAPI lifespan 启动，核心控制项来自 settings：
+
+- tick 周期
+- batch size
+- 全局并发上限
+- 单来源并发上限
+- 最小轮询间隔
+- 去重窗口
+- 错误阈值
+- 最大退避时间（exponential backoff）
+
+此外包含：
+
+- 分组去重（同 source key 不并发重复跑）
+- 失败重试与状态降级（到达阈值进入 `error`）
+- 临时追踪自动过期暂停
+
+## 边界说明
+
+- 非 `web/rss/auto` 来源若未接入账号，会进入 `needs_config`。
+- 数据质量受上游平台稳定性影响。
+- 高时效监控建议结合手动 run 与更短 interval。

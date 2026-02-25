@@ -1,24 +1,24 @@
-# Aelin Docs 导航（可直接映射为网站侧边栏）
+﻿# Aelin Docs 导航（站点侧边栏建议）
 
 - Getting Started
-  - `/welcome`：快速理解 Aelin 的定位与核心价值
-  - `/quick-start`：在最短时间内跑通第一个完整闭环
+  - `/welcome`：Aelin 能力总览与适用场景
+  - `/quick-start`：10 分钟跑通首个闭环
 - Concepts
-  - `/what-is-Aelin`：Aelin 的起点、设计思路与产品方向
+  - `/what-is-Aelin`：产品定位、架构思路与边界
 - Features
-  - `/features/agent-chat`：对话体验、Answer-first 与会话管理
-  - `/features/web-search-memory`：本地记忆与网络检索的协同机制
-  - `/features/tracking`：长期跟踪与持续更新
-  - `/features/proactive`：主动提醒与防打扰策略
-  - `/features/device`：设备状态感知与可控动作
+  - `/features/agent-chat`：Chat + SSE + 引用 + 动作 + 工具链路
+  - `/features/web-search-memory`：Web 检索、本地记忆、文件记忆与媒体摄取
+  - `/features/tracking`：追踪目标、变化检测、快照对比与自治调度
+  - `/features/proactive`：多源接入同步、Desk 观察台、内容打标与主动提醒
+  - `/features/device`：进程控制、模式切换、专注联动、桌面壳能力
 - Guides
-  - `/guides/configure-llm`：LLM 提供商配置与连通性验证
-  - `/guides/tracking-flow`：从一次提问到长期跟踪的完整路径
-  - `/guides/run-multi-platform`：Web / Desktop / Mobile 运行方式
+  - `/guides/configure-llm`：规则模式与 OpenAI-compatible 配置
+  - `/guides/tracking-flow`：从一次问题到长期追踪的标准流程
+  - `/guides/run-multi-platform`：Web/桌面运行与 Windows 打包
 - Reference
-  - `/reference/api`：核心接口分组总览
-  - `/reference/storage`：数据存储与记忆分层
-  - `/reference/faq`：高频问题速查
-  - `/reference/known-issues`：已知限制与规避建议
+  - `/reference/api`：按域路由与核心接口总览
+  - `/reference/storage`：数据库与本地 Markdown 记忆结构
+  - `/reference/faq`：高频问题
+  - `/reference/known-issues`：当前已知限制与规避建议
 - Release Notes
-  - `/release-notes/2026-q1`：版本里程碑与后续计划
+  - `/release-notes/2026-q1`：本周期功能状态与文档基线

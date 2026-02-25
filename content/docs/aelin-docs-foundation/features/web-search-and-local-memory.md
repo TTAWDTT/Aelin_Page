@@ -1,51 +1,81 @@
----
+﻿---
 title: Web Search + Local Memory
 slug: /features/web-search-memory
-description: Aelin 将本地记忆与网络检索融合，让回答既跟得上最新事实，也贴近你的长期上下文。
+description: Aelin 将本地记忆、Web 检索、文件记忆和媒体摄取整合到同一条可追溯链路。
 ---
 
 # Web Search + Local Memory
 
-这个能力可以理解为 Aelin 的“双引擎检索”：
+Aelin 的检索不是单一路径，而是“本地语境 + 外部事实 + 文件记忆”协同。
 
-- 一个引擎理解你已经沉淀的历史信息；
-- 一个引擎补充外部世界的最新变化。
+## 本地记忆层
 
-二者结合后，系统更容易给出“既新、又贴近你真实目标”的回答。
+Chat 每轮会构建上下文包，来源包含：
 
-## 双检索模式
+- 会话记忆摘要与重点 note
+- Todo / Pin recommendation / Daily brief
+- Memory layers（facts / preferences / in_progress）
+- Notifications 与最近追踪命中
 
-- `Local`：优先使用你已经同步和存储的内容。
-- `Web`：访问外部公开网页并抽取正文信息。
-- `Auto`：由模型根据问题类型自动决策是否并行触发。
+这让追问不需要重复背景。
 
-在多数真实问题里，`Auto` 往往是效率与质量平衡较好的选择。
+## Web 检索层
 
-## 为什么要这样做
+对于检索型问题，系统会做：
 
-仅使用单一来源通常会出现明显缺陷：
+- 意图识别与时间敏感度判断
+- 查询分解（query decomposer）
+- 本地/网络子代理并行搜索
+- 证据去重与引用结构化
+- 回答后校验（grounding/coverage/reply verifier）
 
-- 只用本地：上下文足够，但可能过时。
-- 只用网络：信息新鲜，但缺少你的关注脉络。
+当证据不足时，verifier 会触发补搜重试。
 
-融合后，Aelin 可以在回答中更自然地兼顾“事实更新”与“长期连续性”。
+## 文件记忆桥（File Memory Bridge）
 
-## 证据输出
+Aelin 会把高价值结果投影为本地 Markdown，并支持检索：
 
-Aelin 会尽量把关键结论挂钩到证据卡片：
+- tracking profile
+- snapshots
+- changes timeline
+- tracking insight
+- chat diary / parallel draft / daily rollup
+- media insight
 
-- 告诉你结论来自哪些来源。
-- 支持直接打开原始页面（预览或外链）。
-- 在不确定场景下提示你继续核验。
+检索策略是：
 
-这会让回答更可追溯，也更便于你在团队协作中复用。
+1. 优先尝试 OpenViking（若可用）
+2. 失败时回退本地词法评分检索
 
-## 使用建议
+## 日记树与全文读取
 
-- 对实时性要求高的问题，优先允许 Web 参与。
-- 对历史偏好或复盘问题，优先利用 Local 上下文。
-- 对重要结论，尽量阅读证据卡片而非只看摘要句。
+前端 `Diary` 页调用：
 
-## 能力边界
+- `/api/v1/aelin/tracking/file-memory/tree`
+- `/api/v1/aelin/tracking/file-memory/content`
 
-外部网页质量、页面结构变化、反爬策略都会影响检索稳定性。Aelin 会尽量降噪，但并不承诺“任何页面都可稳定抽取”。关键结论请保留必要的人工复核。
+支持按日期浏览、关键词过滤与全文阅读。
+
+## 媒体内容摄取
+
+`/api/v1/aelin/media/ingest` 会对链接做文本抽取，优先级大致为：
+
+- 字幕（manual/auto）
+- 平台文本（如抖音页面/API）
+- ASR 转写
+- 描述文本 fallback
+
+随后生成结构化摘要（overview / evidence / actions）并进行质量门禁：
+
+- `quality_score`
+- `quality_reason`
+- `quality_usable`
+- `needs_review`
+
+质量不过关时可以“处理成功但不写入日记”。
+
+## 边界说明
+
+- 纯视觉信息不会被完整覆盖。
+- 受限平台常需要 cookies 或登录引导。
+- OpenViking 是可选能力，不是必需依赖。

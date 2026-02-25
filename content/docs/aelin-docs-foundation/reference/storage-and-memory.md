@@ -1,51 +1,86 @@
----
+﻿---
 title: Storage and Memory
 slug: /reference/storage
-description: Aelin 的存储结构与记忆分层机制，帮助你理解“为什么它能持续记住”。
+description: Aelin 的数据库结构与文件记忆投影机制说明，帮助你理解“长期记忆”如何落地。
 ---
 
 # Storage and Memory
 
-Aelin 的长期能力，建立在稳定的存储与清晰的记忆分层之上。
+## 数据库存储
 
-这一页会回答三个核心问题：数据存在哪、怎么分层、如何避免语义污染。
+默认数据库：`backend/mercurydesk.db`（SQLite）
 
-## 持久化层
+主要表结构分层：
 
-当前主要包含两类：
+1. 用户与鉴权
+- `users`
+- `oauth_credential_configs`
 
-- 数据库层：用户、账号、消息、记忆、配置等核心实体。
-- 本地层：会话草稿、当前会话状态、界面桥接信息等。
+2. 数据源接入
+- `connected_accounts`
+- `imap_account_configs`
+- `feed_account_configs`
+- `forward_account_configs`
+- `x_api_configs`
 
-数据库负责“长期可靠”，本地层负责“即时体验与交互连续性”。
+3. 消息与标签
+- `contacts`
+- `messages`
+- `message_topic_tags`
+- `user_followed_tags`
 
-## 记忆分层
+4. AI 与记忆
+- `agent_configs`
+- `agent_conversation_memories`
+- `agent_memory_notes`
 
-Aelin 将记忆拆成三个层级：
+5. 跟踪系统
+- `tracking_targets`
+- `tracking_snapshots`
+- `tracking_changes`
 
-- `facts`：相对稳定的客观事实。
-- `preferences`：用户偏好与风格倾向。
-- `in_progress`：进行中的任务状态（例如跟踪流程）。
+## 文件记忆投影
 
-分层的好处是：系统在检索与推理时更容易做优先级决策，减少无关信息干扰。
+除数据库外，Aelin 还会把高价值内容投影为本地 Markdown：
 
-## Workspace 隔离
+- tracking profile / snapshot / change
+- tracking insight
+- chat diary / parallel draft / daily rollup
+- media insight
 
-布局、记忆和主动提醒都会携带 workspace 语义。这样可以降低跨主题污染，避免“在 A 主题积累的上下文误伤 B 主题判断”。
+默认根目录（相对后端）：`../data/aelin_memory`
 
-如果你同时维护多个关注方向，workspace 隔离尤为重要。
+典型路径形态：
 
-## 重装与迁移影响
+- `users/{user_id}/workspaces/{workspace}/tracking/...`
+- `users/{user_id}/workspaces/{workspace}/diary/...`
 
-- 本地 `localStorage` 可能随清理或重装丢失。
-- 数据库是否保留，取决于你的安装方式与数据目录策略。
+## 检索策略
 
-建议在关键阶段保留周期性备份，尤其是长期跟踪与高价值记忆。
+文件记忆查询采用双路径：
 
-## 使用建议
+1. OpenViking 客户端（可选）
+2. 本地词法评分 fallback（默认可用）
 
-- 定期清理低价值记忆，保持检索质量。
-- 对关键主题使用稳定命名与 workspace 规则。
-- 在版本升级前做一次基础数据健康检查。
+对应接口：
 
-良好的存储治理，能显著提升后续回答稳定性与追问效率。
+- `GET /api/v1/aelin/tracking/file-memory/search`
+- `GET /api/v1/aelin/tracking/file-memory/content`
+- `GET /api/v1/aelin/tracking/file-memory/tree`
+
+## 日记组织
+
+- `raw/yyyy/mm/dd/*.md`：原子记录
+- `daily/yyyy/mm/yyyy-mm-dd.md`：按天汇总
+
+系统会把已结束日期的 raw 记录自动 rollup 为 daily 文档。
+
+## 安全与配置
+
+- 敏感字段可通过 `MERCURYDESK_FERNET_KEY` 加密存储。
+- 未配置 Fernet 时保持明文（仅建议本地受控环境）。
+- OAuth 配置按用户存储，支持同实例多用户配置隔离。
+
+## 兼容说明
+
+项目名已切换为 Aelin，但配置前缀仍是 `MERCURYDESK_*`，这是兼容策略，不影响功能。

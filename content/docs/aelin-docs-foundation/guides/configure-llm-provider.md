@@ -1,55 +1,69 @@
----
+﻿---
 title: Configure LLM Provider
 slug: /guides/configure-llm
-description: 配置内置或自定义 LLM 提供商，让 Aelin 在稳定性、时延与回答质量之间取得更好的平衡。
+description: 配置 rule_based 或 OpenAI-compatible 模型链路，并确保密钥与连接方式符合 Aelin 运行要求。
 ---
 
 # Configure LLM Provider
 
-这篇指南帮助你完成一件很实际的事：让 Aelin 的模型链路稳定可用。
+Aelin 支持两条回答路径：
 
-配置模型并不难，但如果忽略了几个关键项，后续会出现“看起来能用、实际不稳定”的情况。下面按最稳妥的流程来。
+- `rule_based`：无需 API Key，可立即使用。
+- `openai-compatible`：通过兼容接口接入外部模型。
 
-## 基本配置项
+## 1. 先确认当前配置
 
-你通常需要填写以下信息：
+可通过接口查看：
 
-- Provider 名称（可自定义，便于区分）
-- Base URL
-- Model
-- API Key
-- Temperature（建议先保守，再逐步调整）
+- `GET /api/v1/agent/config`
+- `GET /api/v1/agent/catalog`
 
-如果你同时接入多个 provider，建议给名称加上用途标记，例如：`general-chat`、`analysis-fast`、`long-context`。
+其中模型目录来自 `models.dev`，后端会缓存刷新，避免每次冷启动都拉远端。
 
-## 推荐配置流程
+## 2. 切换到 OpenAI-compatible
 
-1. 先填入基础参数，不做过度微调。
-2. 执行连通性测试，确认请求链路可达。
-3. 用 2 到 3 条真实问题做小样本验证。
-4. 再根据效果调节温度与模型选择。
+在 Settings 的 AI 配置页，或直接调用：
 
-这个顺序的好处是：你能快速定位问题来自“网络/认证”还是“模型行为”。
+- `PATCH /api/v1/agent/config`
 
-## 质量与成本平衡建议
+建议最小配置：
 
-- 先选择稳定模型，后考虑高性能模型。
-- 如果响应慢，先排查网络与模型负载，再调参数。
-- 不要一开始把温度设得太高，避免回答风格波动。
+- `provider`
+- `base_url`
+- `model`
+- `api_key`
+- `temperature`
 
-对多数场景来说，“稳定 + 可解释”通常比“偶尔惊艳但不可控”更有长期价值。
+## 3. 连通性校验
+
+调用：
+
+- `POST /api/v1/agent/test`
+
+若失败，优先检查：
+
+- model ID 是否与目标 provider 一致
+- base_url 是否是兼容 OpenAI Chat Completions 的入口
+- API Key 是否有效
+
+## 4. 安全与密钥存储
+
+后端支持可选 Fernet 加密：
+
+- 配置 `MERCURYDESK_FERNET_KEY` 后，密钥将加密入库。
+- 未配置 Fernet 时按明文存储（仅建议本地受控环境）。
+
+## 5. 与 OAuth 配置的关系
+
+这一步常被混淆：
+
+- LLM 配置用于“生成能力”。
+- OAuth 配置（Gmail/Outlook/GitHub）用于“数据接入能力”。
+
+二者可以独立配置。
 
 ## 常见问题
 
-- 只返回模板话术：通常是 API Key、Base URL 或模型名不匹配。
-- 响应明显变慢：可能是模型负载高、上下文过长或网络波动。
-- 移动端失败：确认 `VITE_MOBILE_API_BASE_URL` 是否可被设备访问。
-
-## 进阶建议
-
-当你准备上线到长期使用阶段时，建议保留一份“已验证配置快照”：
-
-- 记录可用 provider、model、参数与测试样例。
-- 在重大升级前做一次回归验证。
-
-这样即使后续切换模型，也能快速回到稳定基线。
+- 显示“请先配置 API Key”：说明 provider 不是 rule_based 且缺少密钥。
+- 显示“请先配置 Base URL”：说明 base_url 为空或无效。
+- 目录中有模型但调用失败：通常是 provider/model/base_url 三者不匹配。
