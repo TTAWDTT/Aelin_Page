@@ -1,24 +1,24 @@
-﻿# Aelin Docs 导航（站点侧边栏建议）
+# Aelin Docs 导航（可直接映射为网站侧边栏）
 
 - Getting Started
-  - `/welcome`：Aelin 能力总览与适用场景
-  - `/quick-start`：10 分钟跑通首个闭环
+  - /welcome
+  - /quick-start
 - Concepts
-  - `/what-is-Aelin`：产品定位、架构思路与边界
+  - /how-it-works
 - Features
-  - `/features/agent-chat`：Chat + SSE + 引用 + 动作 + 工具链路
-  - `/features/web-search-memory`：Web 检索、本地记忆、文件记忆与媒体摄取
-  - `/features/tracking`：追踪目标、变化检测、快照对比与自治调度
-  - `/features/proactive`：多源接入同步、Desk 观察台、内容打标与主动提醒
-  - `/features/device`：进程控制、模式切换、专注联动、桌面壳能力
+  - /features/agent-chat
+  - /features/web-search-memory
+  - /features/tracking
+  - /features/proactive
+  - /features/device
 - Guides
-  - `/guides/configure-llm`：规则模式与 OpenAI-compatible 配置
-  - `/guides/tracking-flow`：从一次问题到长期追踪的标准流程
-  - `/guides/run-multi-platform`：Web/桌面运行与 Windows 打包
+  - /guides/configure-llm
+  - /guides/tracking-flow
+  - /guides/run-multi-platform
 - Reference
-  - `/reference/api`：按域路由与核心接口总览
-  - `/reference/storage`：数据库与本地 Markdown 记忆结构
-  - `/reference/faq`：高频问题
-  - `/reference/known-issues`：当前已知限制与规避建议
+  - /reference/api
+  - /reference/storage
+  - /reference/faq
+  - /reference/known-issues
 - Release Notes
-  - `/release-notes/2026-q1`：本周期功能状态与文档基线
+  - /release-notes/2026-q1
