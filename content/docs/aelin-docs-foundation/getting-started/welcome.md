@@ -1,65 +1,72 @@
 ---
-title: Welcome to Aelin
-description: Aelin 是一个让聊天、记忆、搜索、附件与桌面能力协同工作的 AI workspace，适合围绕同一主题持续推进任务。
+title: Aelin Documentation
+description: 从这里开始了解 Aelin，跑起第一个 workspace，连接模型，并选择适合你的 Web 或 Desktop 工作方式。
 date: 2026-04-16
 ---
 
-# Welcome to Aelin
+# Aelin Documentation
 
 Aelin 是一个面向持续工作的 **AI workspace**。
 
-它把这些能力放进同一个空间里：
+Use it when you want chat, files, web research, memory, and desktop capabilities to stay attached to the same workspace.
 
-- 对话
-- 工作区记忆
-- 网页搜索
-- 附件理解
-- 桌面协同
+## Start Here
 
-你不需要再在不同工具之间来回切换，也不必每次都重新向 AI 解释同一套背景。
+1. [Quick Start](quick-start.md)  
+Run Aelin locally and open your first workspace.
 
-## 你可以用 Aelin 做什么
+2. [Configure LLM Provider](../guides/configure-llm-provider.md)  
+Connect the model you want Aelin to use.
 
-### 围绕同一主题持续工作
+3. [Run on Web / Desktop / Mobile](../guides/run-web-desktop-mobile.md)  
+Choose the surface that fits your task.
 
-无论是研究一个项目、跟进一个对象，还是反复完善一份资料，Aelin 都更适合“连续推进”而不是“一次问完”。
+## By Goal
 
-### 让资料和对话留在同一个 workspace
+### I want to understand Aelin
 
-附件、历史结论和新的问题可以一起存在于同一个工作区里，后续会话更容易接着做。
+- [How Aelin Works](../concepts/how-aelin-works.md)
+- [Storage and Memory](../reference/storage-and-memory.md)
 
-### 在需要时补充网页信息
+### I want to work with chat, files, web research, and memory
 
-当问题依赖最新信息或外部证据时，Aelin 可以把网页信息纳入回答过程。
+- [Agent Chat](../features/agent-chat.md)
+- [Web Search + Local Memory](../features/web-search-and-local-memory.md)
+- [Create a Tracking Flow](../guides/create-a-tracking-flow.md)
 
-### 在桌面环境里继续任务
+### I want long-running workspaces
 
-如果你使用桌面版，Aelin 还能进一步连接本地能力，让工作流从聊天延伸到桌面环境。
+- [Long-term Tracking](../features/long-term-tracking.md)
+- [Create a Tracking Flow](../guides/create-a-tracking-flow.md)
+- [FAQ](../reference/faq.md)
 
-## Aelin 最适合的场景
+### I want desktop capabilities
 
-- 持续研究某个主题
-- 处理附件、网页和历史上下文并存的任务
-- 需要长期积累记忆和结论的项目
-- 想把 AI 放进真实工作流而不只是聊天
+- [Device Interaction](../features/device-interaction.md)
+- [Run on Web / Desktop / Mobile](../guides/run-web-desktop-mobile.md)
 
-## 这套文档会带你了解什么
+### I want integration and platform details
 
-- `Getting Started`
-  - 快速上手 Aelin
-- `Concepts`
-  - 理解 Aelin 的工作方式
-- `Features`
-  - 认识主要能力与适用边界
-- `Guides`
-  - 学会配置和使用
-- `Reference`
-  - 查阅接口、存储、FAQ 和限制
+- [API Overview](../reference/api-overview.md)
+- [Known Issues](../reference/known-issues.md)
 
-## 从哪里开始最好
+## Recommended Path
 
-如果你第一次接触 Aelin，建议下一步直接看：
+1. Start with [Quick Start](quick-start.md).
+2. Read [How Aelin Works](../concepts/how-aelin-works.md).
+3. Learn [Agent Chat](../features/agent-chat.md) and [Web Search + Local Memory](../features/web-search-and-local-memory.md).
+4. Build a real workspace with [Create a Tracking Flow](../guides/create-a-tracking-flow.md).
+5. If needed, configure your model in [Configure LLM Provider](../guides/configure-llm-provider.md).
 
-- `Quick Start`
+## Best For
 
-这样你会最快看到 Aelin 是怎样把对话、资料和工作区记忆放到一起的。
+- Ongoing projects rather than one-off prompts.
+- Work that mixes files, notes, web research, and previous conclusions.
+- Tasks that start on the web and continue on the desktop.
+
+## Need a Fast Answer?
+
+- New user: [Quick Start](quick-start.md)
+- Evaluating workflows: [How Aelin Works](../concepts/how-aelin-works.md)
+- Desktop user: [Device Interaction](../features/device-interaction.md)
+- Integrator: [API Overview](../reference/api-overview.md)

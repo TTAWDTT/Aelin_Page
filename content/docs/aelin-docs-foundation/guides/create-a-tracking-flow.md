@@ -1,35 +1,35 @@
 ---
 title: Create a Tracking Flow
-description: 用 Aelin 建立一个能够持续推进的主题工作流，让问题、资料、记忆和后续动作留在同一个 workspace 里。
+description: 用一个固定 workspace 建立持续推进的主题工作流，让问题、资料、结论和下一步留在一起。
 date: 2026-04-16
 ---
 
 # Create a Tracking Flow
 
-这份指南的目标很简单：
+This guide helps you turn one topic into an ongoing workspace.
 
-帮助你把一个“会持续一段时间的主题”放进 Aelin，并让它在后续可以继续推进。
+## Step 1: Choose one clear theme
 
-## 1. 先定义一个清晰主题
-
-最适合 Aelin 的主题，通常都不是泛泛而谈，而是有明确对象或目标，例如：
+最适合 Aelin 的主题通常都有明确对象或目标，例如：
 
 - 一个项目
 - 一家公司
 - 一组文档
 - 一个长期研究方向
 
-## 2. 为它建立固定 workspace
+如果主题太宽，workspace 会很快变乱。
 
-如果一个主题会持续推进，最好让它留在固定的 workspace 中。
+## Step 2: Give it a dedicated workspace
 
-这样做的好处是：
+如果一个主题会持续推进，最好让它留在固定 workspace 中。
+
+这样你会更容易保持：
 
 - 资料集中
 - 问题集中
 - 上下文连续
 
-## 3. 放入第一批资料
+## Step 3: Add the first source material
 
 把与你当前主题相关的内容带进来，例如：
 
@@ -38,7 +38,7 @@ date: 2026-04-16
 - 参考资料
 - 初步问题
 
-## 4. 完成第一轮高质量对话
+## Step 4: Get one strong first answer
 
 第一轮对话最好同时包含：
 
@@ -48,7 +48,7 @@ date: 2026-04-16
 
 Aelin 最擅长的，不是替你“瞬间完成一切”，而是帮你把这个主题组织成可以继续工作的状态。
 
-## 5. 把关键结论留在工作区
+## Step 5: Keep the important conclusions
 
 真正有长期价值的内容，应该留在这个 workspace 里：
 
@@ -58,7 +58,7 @@ Aelin 最擅长的，不是替你“瞬间完成一切”，而是帮你把这�
 
 这样下次回来时，你可以直接继续，而不是重新开始。
 
-## 6. 在后续会话中持续推进
+## Step 6: Return and continue
 
 之后你每次回来，都可以围绕同一个主题继续：
 
@@ -67,6 +67,16 @@ Aelin 最擅长的，不是替你“瞬间完成一切”，而是帮你把这�
 - 更新结论
 - 拓展下一步
 
-这就是 tracking flow 的核心意义：
+## Signs It Is Working
 
-> 让一个主题在 Aelin 里持续活着。
+如果下面这些开始出现，说明你的 tracking flow 已经成型：
+
+- 你不再需要反复解释同一套背景
+- 文件、结论和新问题开始集中在一个 workspace 中
+- 下一次回来时，你可以直接继续推进
+
+## Read Next
+
+- [Long-term Tracking](../features/long-term-tracking.md)
+- [Web Search + Local Memory](../features/web-search-and-local-memory.md)
+- [Storage and Memory](../reference/storage-and-memory.md)

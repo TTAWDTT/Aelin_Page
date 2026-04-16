@@ -1,66 +1,51 @@
 ---
 title: Web Search + Local Memory
-description: Aelin 把网页信息和工作区记忆结合起来，让答案既能处理最新信息，也能延续长期上下文。
+description: Web Search + Local Memory 让 Aelin 同时处理最新信息和已有 workspace 上下文，而不必在两者之间二选一。
 date: 2026-04-16
 ---
 
 # Web Search + Local Memory
 
-## 两种能力，两个职责
+Aelin 会同时使用两类上下文：
 
-Aelin 会同时使用：
+- web search
+- workspace memory
 
-- **网页信息**
-- **工作区记忆**
+它们承担的职责不同。
 
-但它们并不是同一件事。
+## When Web Search Matters
 
-## 网页信息负责“新”
-
-当问题依赖：
+当问题依赖下面这些内容时，web search 更重要：
 
 - 最新变化
 - 外部证据
-- 当前工作区里还没有的信息
+- 当前 workspace 里还没有的信息
+- 需要核对来源的资料
 
-网页信息会特别重要。
+## When Workspace Memory Matters
 
-这适合用来处理：
+当问题依赖下面这些内容时，workspace memory 更重要：
 
-- 新闻与公告
-- 产品更新
-- 新出现的资料
-- 需要核对来源的内容
+- 你已经做过的研究
+- 之前沉淀下来的判断
+- 当前主题的长期上下文
+- 你不想每次重复解释的背景
 
-## 工作区记忆负责“连续”
+## What This Gives You
 
-当问题依赖：
-
-- 你已经研究过的主题
-- 之前沉淀下来的结论
-- 当前 workspace 的长期上下文
-
-工作区记忆就会更重要。
-
-这让 Aelin 能够在后续会话里继续利用你已经建立好的背景，而不是每次从零开始。
-
-## 为什么要把两者结合
-
-如果只有网页信息，系统会缺少连续性。
-
-如果只有工作区记忆，系统又会缺少对外部变化的感知。
-
-把两者放在一起，Aelin 才更像一个真实的工作搭档：
+把两者放在一起，你可以同时得到：
 
 - 既知道你在做什么
 - 也知道外面的信息发生了什么
 
-## 对用户最直接的好处
+这会直接减少三种成本：
 
-你不需要在“长期上下文”和“最新信息”之间二选一。
+- 重复解释背景的成本
+- 在多个工具间切换的成本
+- 追踪“哪些信息是新的，哪些是旧的”的成本
 
-Aelin 的目标是同时给你：
+## Read Next
 
-- 连续性
-- 新鲜度
-- 更少的重复解释成本
+- [How Aelin Works](../concepts/how-aelin-works.md)
+- [Storage and Memory](../reference/storage-and-memory.md)
+- [Create a Tracking Flow](../guides/create-a-tracking-flow.md)

@@ -1,57 +1,52 @@
 ---
 title: Storage and Memory
-description: 了解 Aelin 如何组织工作区记忆、附件和输出内容，让一个主题可以在时间里持续延续。
+description: 了解 Aelin 如何组织 workspace 里的记忆、文件和输出内容，以及它们为什么对持续工作很重要。
 date: 2026-04-16
 ---
 
 # Storage and Memory
 
-## 为什么记忆对 Aelin 很重要
+## What Gets Stored at the Workspace Level
 
-Aelin 的价值之一，在于让一个主题可以持续存在于工作区里。
+在 Aelin 里，一个 workspace 不只是聊天列表。
 
-这意味着：
+它还可以承接：
 
-- 重要结论不会轻易丢失
-- 后续会话可以继续利用已有上下文
-- 资料、附件和记忆能够自然协同
+- 长期上下文
+- 相关文件和资料
+- 有价值的结论
+- 后续继续工作的基础
 
-## 工作区记忆
+## What Memory Is For
 
-你可以把工作区记忆理解成：
+workspace memory 的作用不是“记住一切”，而是保留真正重要的背景。
+
+它最适合保存：
 
 - 一个主题的长期背景
-- 后续任务可复用的上下文
-- 让对话持续推进的基础
+- 后续任务可复用的判断
+- 不想在每轮对话里重复解释的内容
 
-对用户来说，最重要的不是记忆文件本身，而是：
+## How Files Fit In
 
-> 下次回来时，Aelin 还能接着理解你在做什么。
+文件不会脱离 workspace 单独存在。
 
-## 附件与资料
-
-附件并不是单独存在的。
-
-在 Aelin 里，它们会和：
+它们会和：
 
 - 当前问题
-- 工作区记忆
+- workspace memory
 - 后续结论
 
 共同组成一个可继续推进的工作流。
 
-## 输出内容
+## What This Means for the User
 
-当 Aelin 完成一个任务时，结果不一定只是一段回答。
+对用户来说，最重要的不是记忆文件本身，而是：
 
-它还可能涉及：
+下次回来时，Aelin 还能接着理解你在做什么。
 
-- 整理后的内容
-- 工作区中的相关文件
-- 可继续使用的输出结果
+## Read Next
 
-## 对用户最重要的一点
-
-Aelin 把“记忆”和“资料”当成工作的一部分，而不是一次性会话结束后就消失的东西。
-
-这也是它比普通聊天工具更适合长期任务的原因之一。
+- [How Aelin Works](../concepts/how-aelin-works.md)
+- [Long-term Tracking](../features/long-term-tracking.md)
+- [Create a Tracking Flow](../guides/create-a-tracking-flow.md)

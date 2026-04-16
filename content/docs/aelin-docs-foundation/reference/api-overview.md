@@ -1,14 +1,16 @@
 ---
 title: API Overview
-description: 如果你要接入或扩展 Aelin，可以从运行时接口和产品接口这两层来理解它。
+description: 如果你要接入或扩展 Aelin，可以先把接口理解成运行时接口和产品接口两层。
 date: 2026-04-16
 ---
 
 # API Overview
 
-如果你是集成开发者，可以把 Aelin 的接口理解成两层：
+这页面向需要接入、扩展或自托管 Aelin 的开发者。
 
-## 1. 运行时接口
+最简单的理解方式是：先把接口分成两层。
+
+## Runtime APIs
 
 这一层负责对话、线程和执行过程，核心包括：
 
@@ -17,9 +19,9 @@ date: 2026-04-16
 - `GET /threads/:thread_id`
 - `POST /threads/:thread_id/runs/stream`
 
-如果你希望接入 Aelin 的对话和运行时能力，这一层最重要。
+如果你要接入对话、线程和运行时能力，这一层最重要。
 
-## 2. 产品接口
+## Product APIs
 
 这一层负责 Aelin 的产品能力，例如：
 
@@ -35,18 +37,13 @@ date: 2026-04-16
 - 设备能力
 - 产品级入口
 
-## 什么时候你会用到这些接口
+## Which Layer Should You Use?
 
-- 如果你想接入聊天或运行时能力
-  - 看运行时接口
-- 如果你想接入附件、配置或桌面能力
-  - 看产品接口
+- 如果你想接入聊天或运行时能力，先看 Runtime APIs。
+- 如果你想接入附件、配置或桌面能力，先看 Product APIs。
 
-## 最简单的理解方式
+## Read Next
 
-Aelin 并不是只有一个“聊天接口”，而是把：
-
-- 运行时能力
-- 产品能力
-
-组织成了更清晰的两层结构。
+- [Quick Start](../getting-started/quick-start.md)
+- [Run on Web / Desktop / Mobile](../guides/run-web-desktop-mobile.md)
+- [Known Issues](known-issues.md)

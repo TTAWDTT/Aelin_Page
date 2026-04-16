@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Aelin",
   description:
-    "Aelin 将聊天、记忆、网页搜索、附件理解与桌面能力放进同一个 AI workspace，让你围绕同一主题持续工作。",
+    "Aelin 是一个面向持续工作的 AI workspace，把聊天、文件、网页研究、记忆与桌面能力放进同一个 workspace。",
   navItems: [
     {
       label: "首页",

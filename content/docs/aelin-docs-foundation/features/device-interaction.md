@@ -1,18 +1,16 @@
 ---
 title: Device Interaction
-description: 在桌面环境中，Aelin 可以进一步连接本地能力，让对话与真实桌面工作流发生联系。
+description: Device Interaction 让 Aelin 在 Desktop 环境里连接本地能力，把聊天进一步带到真实桌面工作流中。
 date: 2026-04-16
 ---
 
 # Device Interaction
 
-## 从聊天走向桌面
+Device Interaction 是 Aelin 在 Desktop 里的关键能力之一。
 
-在桌面环境里，Aelin 不只是一个网页里的聊天框。
+它的目标很直接：当任务离开浏览器、进入本地环境时，workspace 不需要断掉。
 
-它可以进一步连接本地能力，让你把对话和桌面任务放进同一个流程里。
-
-## 这类能力包括什么
+## What It Does
 
 在不同环境下，Aelin 可以支持一些本地协同能力，例如：
 
@@ -21,20 +19,24 @@ date: 2026-04-16
 - 打开本地路径
 - 与本地应用或命令流程配合
 
-## 这对用户意味着什么
-
-很多任务并不只发生在聊天窗口里。
-
-真正的工作往往还包括：
-
-- 看屏幕内容
-- 打开资料
-- 在本地环境里继续操作
-
-Aelin 的桌面能力，就是为了把这些动作和聊天体验连接起来。
-
-## 最适合的使用场景
+## Best For
 
 - 一边查看本地内容，一边让 Aelin 辅助理解或推进任务
 - 把聊天中的结果继续带到桌面工作流里
 - 让 AI 和真实工作环境之间的距离更短
+
+## What to Expect
+
+如果你主要使用 Web，部分本地能力不会出现。
+
+如果你使用 Desktop，Aelin 更容易完成这些事情：
+
+- 看到你当前正在处理的屏幕或内容
+- 打开与当前任务相关的资源
+- 让聊天结果继续影响本地工作流
+
+## Read Next
+
+- [Run on Web / Desktop / Mobile](../guides/run-web-desktop-mobile.md)
+- [Agent Chat](agent-chat.md)
+- [Known Issues](../reference/known-issues.md)

@@ -1,24 +1,37 @@
 ---
 title: Quick Start
-description: 用最短路径跑起 Aelin，并快速体验它如何把对话、记忆、资料和桌面能力放进同一个工作流。
+description: 用最短路径跑起 Aelin，连接模型，并验证第一个 workspace 已经可以工作。
 date: 2026-04-16
 ---
 
 # Quick Start
 
-这份 Quick Start 面向两类人：
+This guide gets you to a working Aelin setup as quickly as possible.
 
-- 想先体验 Aelin 的用户
-- 想在本地跑起 Aelin 的开发者
+At the end, you should have:
 
-## 1. 获取主仓库
+- backend running
+- frontend running
+- a model configured
+- one successful workspace session
+
+## Before You Start
+
+准备好下面这些东西：
+
+- Python 环境
+- Node.js 与 npm
+- 一个可用的模型服务
+- 对应的 API key
+
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/TTAWDTT/Aelin.git
 cd Aelin
 ```
 
-## 2. 启动 backend
+## 2. Start the backend
 
 ```bash
 cd backend
@@ -32,7 +45,7 @@ Windows 也可以使用：
 ./scripts/dev-backend.ps1
 ```
 
-## 3. 启动 frontend
+## 3. Start the frontend
 
 ```bash
 cd frontend
@@ -44,9 +57,9 @@ npm run dev
 
 - `http://127.0.0.1:5173`
 
-## 4. 可选：启动 desktop
+## 4. Optional: start Desktop
 
-如果你想体验桌面能力，再额外启动 Electron runtime：
+如果你想测试桌面能力，再额外启动 Electron runtime：
 
 ```bash
 cd desktop
@@ -54,7 +67,7 @@ npm install
 npm run dev
 ```
 
-## 5. 配置模型
+## 5. Configure your model
 
 进入设置页，填写你要使用的模型配置：
 
@@ -63,19 +76,21 @@ npm run dev
 - `base_url`
 - `api_key`
 
-## 6. 开始第一次会话
+如果你不确定怎么选，下一步读 [Configure LLM Provider](../guides/configure-llm-provider.md)。
 
-建议你用一个同时涉及资料和持续工作的例子来体验，例如：
+## 6. Verify with one real task
+
+建议你直接用一个同时涉及文件和持续工作的例子，例如：
 
 > “总结这份附件的重点，并告诉我接下来应该怎么继续。”
 
-这样你会更容易感受到 Aelin 的核心体验：
+如果这一步正常，你应该能看到：
 
-- 对话和资料在同一个工作流里
-- 工作区能承接上下文
-- 回答更偏向帮助你继续推进任务
+- workspace 已经开始承接上下文
+- 文件内容进入当前任务
+- 回答不只是结论，还会带出下一步
 
-## 7. 最小验证清单
+## 7. Minimal checklist
 
 如果下面这些都正常，说明你已经跑通了 Aelin 的核心体验：
 
@@ -83,4 +98,10 @@ npm run dev
 2. frontend 可以打开
 3. 模型配置可以保存
 4. 新开会话可以流式返回结果
-5. `/docs` 和 `/about` 可以打开
+5. 你可以完成一次真实问答
+
+## Next Steps
+
+- [How Aelin Works](../concepts/how-aelin-works.md)
+- [Create a Tracking Flow](../guides/create-a-tracking-flow.md)
+- [Run on Web / Desktop / Mobile](../guides/run-web-desktop-mobile.md)
