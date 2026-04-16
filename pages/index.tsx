@@ -42,7 +42,7 @@ const capabilities = [
   },
   {
     title: "Files in context",
-    description: "附件不是外挂。文件会和当前问题、历史上下文一起参与工作流。",
+    description: "附件会和当前问题、历史上下文一起参与工作流。",
   },
   {
     title: "Web research when needed",
@@ -87,7 +87,7 @@ const useCases = [
   "持续研究一个项目、公司、主题或对象。",
   "把附件、网页信息和历史上下文放在同一个地方处理。",
   "从 Web 开始工作，再在需要时延伸到 Desktop。",
-  "让 AI 成为工作流的一部分，而不是一次性的聊天窗口。",
+  "让 AI 参与持续的 workspace 工作流。",
 ] as const;
 
 export default function IndexPage() {
@@ -116,7 +116,7 @@ export default function IndexPage() {
             </h2>
             <p className="max-w-3xl text-base leading-8 text-zinc-700 dark:text-white/80 md:text-lg">
               把聊天、文件、网页研究、记忆与桌面能力放进同一个
-              workspace。当一个主题需要反复推进，而不是一次问完时， Aelin
+              workspace。当一个主题需要反复推进时，Aelin
               会把上下文和下一步都留在同一个地方。
             </p>
           </div>

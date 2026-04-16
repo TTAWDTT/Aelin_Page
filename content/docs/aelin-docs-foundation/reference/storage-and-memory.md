@@ -19,7 +19,7 @@ date: 2026-04-16
 
 ## What Memory Is For
 
-workspace memory 的作用不是“记住一切”，而是保留真正重要的背景。
+workspace memory 会保留真正重要的背景，让后续任务可以直接复用。
 
 它最适合保存：
 
@@ -41,9 +41,9 @@ workspace memory 的作用不是“记住一切”，而是保留真正重要的
 
 ## What This Means for the User
 
-对用户来说，最重要的不是记忆文件本身，而是：
+对用户来说，最直接的结果是：
 
-下次回来时，Aelin 还能接着理解你在做什么。
+下次回来时，Aelin 仍然知道你在做什么，并能继续利用已有背景、文件和结论。
 
 ## Read Next
 

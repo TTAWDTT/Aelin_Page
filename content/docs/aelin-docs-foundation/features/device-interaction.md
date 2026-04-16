@@ -8,7 +8,7 @@ date: 2026-04-16
 
 Device Interaction 是 Aelin 在 Desktop 里的关键能力之一。
 
-它的目标很直接：当任务离开浏览器、进入本地环境时，workspace 不需要断掉。
+当任务离开浏览器、进入本地环境时，Device Interaction 会把工作继续留在同一个 workspace 里。
 
 ## What It Does
 

@@ -1,12 +1,12 @@
 ---
 title: Proactive Interaction
-description: Proactive Interaction 指的是 Aelin 会尽量帮助你继续推进任务，而不是在一轮回答后立刻停住。
+description: Proactive Interaction 让 Aelin 在回答之后继续给出下一步建议、指出缺失信息，并帮助你保持任务推进。
 date: 2026-04-16
 ---
 
 # Proactive Interaction
 
-在 Aelin 里，proactive interaction 的重点不是“自动替你做决定”，而是帮助你在回答之后更容易继续工作。
+在 Aelin 里，proactive interaction 会让回答之后的下一步更加清晰。
 
 ## What It Looks Like
 
@@ -21,11 +21,9 @@ date: 2026-04-16
 - 某个任务已经完成一部分，需要下一步建议
 - 某个对象值得后续继续关注
 
-## What It Is Not
+## How It Stays Useful
 
-这不是“全自动代办系统”。
-
-Aelin 仍然应该是：
+Aelin 会把这类帮助保持在可理解、可控制的范围里：
 
 - 可理解的
 - 可控制的
@@ -33,9 +31,9 @@ Aelin 仍然应该是：
 
 ## Why It Matters
 
-很多 AI 工具的问题在于：回答结束，任务也跟着结束。
+任务推进通常发生在第一次回答之后。
 
-而 Aelin 想做的是让“回答之后还能做什么”也成为产品体验的一部分。
+Proactive Interaction 会让 Aelin 在这个阶段继续提供帮助，让用户更容易决定下一步、补足缺失信息并保持节奏。
 
 ## Read Next
 

@@ -6,15 +6,13 @@ date: 2026-04-16
 
 # Long-term Tracking
 
-Long-term Tracking 不是某个单独的按钮，而是一种使用 Aelin 的方式。
-
-它的核心是：让一个主题在时间里继续存在，而不是每次都从零开始。
+Long-term Tracking 是把一个持续主题留在固定 workspace 中，并在之后反复回到这里继续工作。
 
 ## What It Does
 
 - 把同一主题的文件、问题和结论留在同一个 workspace
 - 让真正重要的背景在后续会话里继续可用
-- 让你回来时可以直接接着推进，而不是重新解释一遍
+- 让你回来时更快进入状态
 
 ## Best For
 
@@ -34,7 +32,7 @@ Long-term Tracking 不是某个单独的按钮，而是一种使用 Aelin 的方
 
 ## What to Expect
 
-Long-term Tracking 带来的变化通常不是“AI 更神奇了”，而是工作方式更连续了：
+Long-term Tracking 会让工作方式更连续：
 
 - 资料不再散落在多个临时聊天里
 - 历史结论更容易复用

@@ -60,7 +60,7 @@ Choose the surface that fits your task.
 
 ## Best For
 
-- Ongoing projects rather than one-off prompts.
+- Ongoing projects and multi-step work.
 - Work that mixes files, notes, web research, and previous conclusions.
 - Tasks that start on the web and continue on the desktop.
 

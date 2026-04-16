@@ -8,20 +8,11 @@ date: 2026-04-16
 
 Aelin 是一个面向持续工作的 **AI workspace**。
 
-它适合那些不会在一轮聊天里结束的任务。
-
-如果一个主题需要：
-
-- 持续多天甚至更久
-- 反复读取附件和外部资料
-- 保留之前的判断和上下文
-- 在需要时延伸到桌面环境
-
-Aelin 就会比一次性的聊天工具更合适。
+Aelin 把一个主题相关的聊天、文件、网页研究、workspace memory 和 desktop capabilities 放进同一个 workspace，让工作可以在时间里持续推进。
 
 ## What Aelin Is
 
-Aelin 把这些能力放进同一个 workspace：
+Aelin 把这些能力组织在同一个 workspace：
 
 - Chat
 - Files
@@ -29,7 +20,7 @@ Aelin 把这些能力放进同一个 workspace：
 - Workspace memory
 - Desktop capabilities
 
-目标很直接：让同一个主题可以在时间里继续推进，而不是每次重新开始。
+Aelin 的产品重点是让同一个主题始终留在可继续工作的状态里。
 
 ## What It Is For
 
@@ -44,7 +35,7 @@ Aelin 最适合下面这些工作方式：
 
 ### Workspace first
 
-重要内容应该留在 workspace 里，而不是散落在一次次独立对话中。
+关键上下文、文件和结论都留在 workspace 里，方便后续继续使用。
 
 ### Answer first
 
@@ -56,7 +47,7 @@ Aelin 最适合下面这些工作方式：
 
 ### Surfaces that connect
 
-Web 和 Desktop 不是两套割裂的体验，而是同一个工作流的不同入口。
+Web 和 Desktop 是同一个 workspace 的两个入口。
 
 ## Read Next
 
