@@ -1,44 +1,57 @@
 ---
-title: Aelin Docs 信息架构
-slug: /
-description: 这是一套面向产品官网文档页的内容基础，结构参考 Happy Docs 的浏览方式。
+title: Docs Source Notes
+description: Aelin 官网文档的编辑说明与信息边界。这一页是内容维护说明，不作为公开文档入口。
+date: 2026-04-16
 ---
 
-# Aelin Docs 信息架构
+# Docs Source Notes
 
-这套文档不是内部技术笔记，而是给“最终用户 + 集成开发者”看的产品文档底稿。
+这组文档服务于 Aelin 官网，对象主要包括：
 
-## 文档目标
+- 首次接触 Aelin 的用户
+- 想理解当前产品边界的开发者
+- 需要对接或自托管 Aelin 的集成开发者
 
-1. 3 分钟内让新用户知道 Aelin 是什么、能做什么。
-2. 10 分钟内让用户跑通第一个可用闭环（问答 + 跟踪 + 持久化）。
-3. 让功能、限制、部署方式都能被直接查到。
+## 写作边界
 
-## 导航顺序（建议）
+公开文档应优先描述：
 
-1. Welcome
-2. Quick Start
-3. How Aelin Works
-4. Features
-5. Guides
-6. API Reference
-7. FAQ / Known Issues / Release Notes
+- 当前已经落地的能力
+- 稳定可依赖的接口与行为
+- 真实存在的运行边界与限制
 
-## 目录
+公开文档不应把以下内容包装成既成事实：
 
-- `getting-started/welcome.md`
-- `getting-started/quick-start.md`
-- `concepts/how-aelin-works.md`
-- `features/agent-chat.md`
-- `features/web-search-and-local-memory.md`
-- `features/long-term-tracking.md`
-- `features/proactive-interaction.md`
-- `features/device-interaction.md`
-- `guides/configure-llm-provider.md`
-- `guides/create-a-tracking-flow.md`
-- `guides/run-web-desktop-mobile.md`
-- `reference/api-overview.md`
-- `reference/storage-and-memory.md`
-- `reference/faq.md`
-- `reference/known-issues.md`
-- `release-notes/2026-q1.md`
+- 已归档的旧方案
+- 早期 prototype 的自定义 chat loop
+- 尚未稳定交付的“未来也许会有”的体验
+
+## 当前主线
+
+写作时请以这条链路为准：
+
+- 前端 `useStream(...)`
+- LangGraph Agent Server `/assistants`、`/threads`、`/runs/stream`
+- DeepAgents graph
+- Aelin 薄产品壳与桌面集成能力
+
+## 当前文档分组
+
+- `getting-started/`
+  - 帮读者在最短时间建立正确认知并跑通本地环境
+- `concepts/`
+  - 解释 Aelin 的运行方式与设计取向
+- `features/`
+  - 解释当前公开能力与边界
+- `guides/`
+  - 面向实际使用与接入
+- `reference/`
+  - 存放接口、存储、FAQ 与限制
+- `release-notes/`
+  - 记录阶段性变化
+
+## 维护原则
+
+- 不要把仓库级 `AGENTS.md` 和运行时 `/memory/AGENTS.md` 混为一谈
+- 不要重新引入“旧协议兼容层”的叙事
+- 如果实现已经换成官方线程/运行语义，文档也要同步切换

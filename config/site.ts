@@ -2,7 +2,8 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Aelin",
-  description: "Make beautiful websites regardless of your design experience.",
+  description:
+    "Aelin is a DeepAgents-powered AI workspace with file-backed memory, official run streaming, and web/desktop product surfaces.",
   navItems: [
     {
       label: "Home",

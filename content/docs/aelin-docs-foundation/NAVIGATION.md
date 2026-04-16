@@ -1,24 +1,31 @@
-# Aelin Docs 导航（可直接映射为网站侧边栏）
+# Aelin Docs Navigation Notes
+
+当前官网文档建议保持以下顺序：
 
 - Getting Started
-  - /welcome
-  - /quick-start
+  - `welcome.md`
+  - `quick-start.md`
 - Concepts
-  - /how-it-works
+  - `how-aelin-works.md`
 - Features
-  - /features/agent-chat
-  - /features/web-search-memory
-  - /features/tracking
-  - /features/proactive
-  - /features/device
+  - `agent-chat.md`
+  - `web-search-and-local-memory.md`
+  - `long-term-tracking.md`
+  - `proactive-interaction.md`
+  - `device-interaction.md`
 - Guides
-  - /guides/configure-llm
-  - /guides/tracking-flow
-  - /guides/run-multi-platform
+  - `configure-llm-provider.md`
+  - `create-a-tracking-flow.md`
+  - `run-web-desktop-mobile.md`
 - Reference
-  - /reference/api
-  - /reference/storage
-  - /reference/faq
-  - /reference/known-issues
+  - `api-overview.md`
+  - `storage-and-memory.md`
+  - `faq.md`
+  - `known-issues.md`
 - Release Notes
-  - /release-notes/2026-q1
+  - `2026-q1.md`
+
+说明：
+
+- `README.md` 与本文件属于内容维护说明，不应作为公开文档入口。
+- 官网文案应优先体现当前 DeepAgents-native 方向，而不是早期原型阶段的表述。

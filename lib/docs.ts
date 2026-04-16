@@ -85,6 +85,7 @@ type PersistedDocsSnapshot = DocsSnapshot & {
 };
 
 const DOC_EXTENSIONS = new Set([".md", ".mdx"]);
+const HIDDEN_DOC_BASENAMES = new Set(["README.md", "NAVIGATION.md"]);
 const SNAPSHOT_SCHEMA_VERSION = 2;
 const FOUNDATION_ROOT = path.resolve(
   process.cwd(),
@@ -326,6 +327,10 @@ function readDocsRecursively(rootDir: string, currentDir = ""): RawDocRecord[] {
 
     if (entry.isDirectory()) {
       docs.push(...readDocsRecursively(rootDir, nextRelativePath));
+      continue;
+    }
+
+    if (HIDDEN_DOC_BASENAMES.has(entry.name)) {
       continue;
     }
 
