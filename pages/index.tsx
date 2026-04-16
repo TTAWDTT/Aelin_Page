@@ -39,8 +39,12 @@ export default function IndexPage() {
         <h2
           className={`${subtitle()} ${fontChinese.className} text-center mx-auto`}
         >
-          你的个人信息助手
+          把聊天、记忆、搜索、附件与桌面能力放进同一个 AI workspace
         </h2>
+        <p className="mx-auto max-w-2xl text-center text-sm leading-7 text-zinc-600 dark:text-white/75 md:text-base">
+          Aelin 帮你围绕同一主题持续工作。你可以读取附件、结合网页信息、
+          记住重要上下文，并在需要时把任务继续带到桌面环境里完成。
+        </p>
         <div className="flex gap-3">
           <Link
             as={NextLink}
@@ -52,7 +56,7 @@ export default function IndexPage() {
             href={siteConfig.links.docs}
             prefetch={shouldPrefetch}
           >
-            Documentation
+            查看文档
           </Link>
           <Link
             isExternal

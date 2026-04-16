@@ -3,32 +3,32 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Aelin",
   description:
-    "Aelin is a DeepAgents-powered AI workspace with file-backed memory, official run streaming, and web/desktop product surfaces.",
+    "Aelin 将聊天、记忆、网页搜索、附件理解与桌面能力放进同一个 AI workspace，让你围绕同一主题持续工作。",
   navItems: [
     {
-      label: "Home",
+      label: "首页",
       href: "/",
     },
     {
-      label: "Docs",
+      label: "文档",
       href: "/docs",
     },
     {
-      label: "About",
+      label: "关于",
       href: "/about",
     },
   ],
   navMenuItems: [
     {
-      label: "Home",
+      label: "首页",
       href: "/",
     },
     {
-      label: "Docs",
+      label: "文档",
       href: "/docs",
     },
     {
-      label: "About",
+      label: "关于",
       href: "/about",
     },
   ],
